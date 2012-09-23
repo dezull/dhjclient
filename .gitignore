@@ -1,0 +1,15 @@
+# swap/temp
+*.swp
+*.tmp
+*.bak
+
+# eclipse 
+.classpath
+.project
+.settings/
+
+# maven
+target/
+
+# generate-able
+doc/
