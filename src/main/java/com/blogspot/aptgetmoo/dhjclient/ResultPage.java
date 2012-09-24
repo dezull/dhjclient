@@ -61,8 +61,10 @@ public class ResultPage implements IResultPage {
 
 	@Override
 	public String fetchHtml() throws IOException {
+		URL url = new URL(getUrl());
+		
 		try {
-			HttpURLConnection connection = (HttpURLConnection) mBaseUrl.openConnection();
+			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("GET");
 			connection.connect();
 			InputStream is = connection.getInputStream();
