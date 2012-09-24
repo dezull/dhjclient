@@ -67,7 +67,6 @@ public class ResultPage implements IResultPage {
 			connection.connect();
 			InputStream is = connection.getInputStream();
 
-			doSomething();
 			try {
 		        return new Scanner(is).useDelimiter("\\A").next();
 		    } catch (NoSuchElementException e) {
@@ -85,7 +84,4 @@ public class ResultPage implements IResultPage {
 		mPage = pPage;
 	}
 
-	private void doSomething() throws ProtocolException {
-		throw new ProtocolException("test");
-	}
 }
