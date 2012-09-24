@@ -16,7 +16,7 @@ import com.blogspot.aptgetmoo.dhjclient.parser.Webpage;
  */
 public class Finder implements IFinder {
 
-	private final static int DEFAULT_ITEMS_PER_PAGE = 20;
+    private final static int DEFAULT_ITEMS_PER_PAGE = 20;
 
     private final Webpage mResultPage;
 
@@ -60,11 +60,11 @@ public class Finder implements IFinder {
 
     @Override
     public int getItemsPerPage() {
-    	return mItemsPerPage;
+        return mItemsPerPage;
     }
 
     public void setItemsPerPage(int pItemsPerPage) {
-    	mItemsPerPage = pItemsPerPage;
+        mItemsPerPage = pItemsPerPage;
     }
 
     private ArrayList<Item> parse(final String keyword,
