@@ -1,20 +1,16 @@
 package com.blogspot.aptgetmoo.dhjclient.finder;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+
+import com.blogspot.aptgetmoo.dhjclient.parser.Webpage;
 
 /**
  * HTML page returned by Jakim's Halal web search
  *
  * @author Dzul Nizam
  */
-public class ResultPage implements IResultPage {
+public class ResultPage extends Webpage {
 
 	private final static String DEFAULT_BASE_URL =
 			"http://www.halal.gov.my/ehalal/directory_standalone.php";
@@ -59,27 +55,6 @@ public class ResultPage implements IResultPage {
 		return getBaseUrl() + "?cari=" + mKeyword + "&type=" + mType + "&page=" + mPage;
 	}
 
-	@Override
-	public String fetchHtml() throws IOException {
-		URL url = new URL(getUrl());
-		
-		try {
-			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-			connection.setRequestMethod("GET");
-			connection.connect();
-			InputStream is = connection.getInputStream();
-
-			try {
-		        return new Scanner(is).useDelimiter("\\A").next();
-		    } catch (NoSuchElementException e) {
-		        return "";
-		    }
-		} catch (ProtocolException e) {
-			throw new IOException(e);
-		}
-	}
-
-	@Override
 	public void setFetchParameters(String pKeyword, String pType, int pPage) {
 		mKeyword = pKeyword;
 		mType = pType;

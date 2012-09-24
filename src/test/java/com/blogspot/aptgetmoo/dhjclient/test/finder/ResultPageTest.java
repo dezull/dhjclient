@@ -76,7 +76,7 @@ public class ResultPageTest extends TestCase {
 		assertEquals("Failed to reset parameters (#setFetchParameters)", url, result.getUrl());
 	}
 
-	public void testFetchHtml() {
+	public void testGetParseable() {
 		String keyword = "kfc";
 		String type = "P";
 		int page = 1;
@@ -89,7 +89,7 @@ public class ResultPageTest extends TestCase {
 			mockResult = new MockResultPage(validUrl);
 			mockResult.setFetchParameters(keyword, type, page);
 			try {
-				assertNotNull(mockResult.fetchHtml());
+				assertNotNull(mockResult.getParseable());
 			} catch (IOException e) {
 				fail("Unexpected IOException");
 			}

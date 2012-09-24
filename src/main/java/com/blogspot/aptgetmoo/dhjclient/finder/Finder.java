@@ -9,6 +9,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.safety.Whitelist;
 import org.jsoup.select.Elements;
 
+import com.blogspot.aptgetmoo.dhjclient.parser.Webpage;
+
 /**
  * @author Dzul Nizam
  */
@@ -16,7 +18,7 @@ public class Finder implements IFinder {
 
 	private final static int DEFAULT_ITEMS_PER_PAGE = 20;
 
-    private final IResultPage mResultPage;
+    private final Webpage mResultPage;
 
     private int mItemsPerPage;
 
@@ -24,12 +26,12 @@ public class Finder implements IFinder {
 
     private int mTotalResult;
 
-    public Finder(IResultPage pResultPage) {
+    public Finder(Webpage pResultPage) {
         mResultPage = pResultPage;
         mItemsPerPage = DEFAULT_ITEMS_PER_PAGE;
     }
 
-    public Finder(IResultPage pResultPage, int pItemsPerPage) {
+    public Finder(Webpage pResultPage, int pItemsPerPage) {
         mResultPage = pResultPage;
         mItemsPerPage = pItemsPerPage;
     }
@@ -71,8 +73,8 @@ public class Finder implements IFinder {
         Document doc = null;
         ArrayList<Item> dataHolders = null;
 
-        mResultPage.setFetchParameters(keyword, type.getQueryStr(), page);
-        doc = Jsoup.parse(mResultPage.fetchHtml());
+        ((ResultPage) mResultPage).setFetchParameters(keyword, type.getQueryStr(), page);
+        doc = Jsoup.parse(mResultPage.getParseable());
 
         dataHolders = new ArrayList<Item>();
 

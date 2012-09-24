@@ -29,7 +29,7 @@ public class MockResultPage extends ResultPage {
 	 * @return Mocked HTML String, similar to what Jakim's web should to return
 	 */
 	@Override
-	public String fetchHtml() {
+	public String getParseable() {
 		InputStream is = getClass().getResourceAsStream("/kfc_1.html");
 
 		try {
