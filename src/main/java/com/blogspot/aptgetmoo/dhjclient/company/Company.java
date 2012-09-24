@@ -9,7 +9,7 @@ import org.jsoup.select.Elements;
 
 public class Company {
 
-	private CompanyPage mPage;
+    private CompanyPage mPage;
 
     private final String mCompCode;
 
@@ -29,26 +29,26 @@ public class Company {
 
     private String mJakimRefNo;
 
-	public Company(CompanyPage pPage) {
-		mPage = pPage;
-		mCompCode = mPage.getCompanyCode();
-	}
+    public Company(CompanyPage pPage) {
+        mPage = pPage;
+        mCompCode = mPage.getCompanyCode();
+    }
 
-	public Company parse() {
-		Document doc;
+    public Company parse() {
+        Document doc;
 
-		try {
-			doc = Jsoup.parse(mPage.getParseable());
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
+        try {
+            doc = Jsoup.parse(mPage.getParseable());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
-		if (doc != null) {
+        if (doc != null) {
             parseRows(doc.select("table table tr"));
         }
 
-		return this;
-	}
+        return this;
+    }
 
     public String getCompanyCode() {
         return mCompCode;
