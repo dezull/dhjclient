@@ -1,32 +1,35 @@
 package com.blogspot.aptgetmoo.dhjclient.test.finder;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.blogspot.aptgetmoo.dhjclient.finder.Finder;
 import com.blogspot.aptgetmoo.dhjclient.finder.IFinder;
 import com.blogspot.aptgetmoo.dhjclient.finder.Item;
 import com.blogspot.aptgetmoo.dhjclient.finder.ItemType;
 
-public class DHJClientTest extends TestCase {
+public class DHJClientTest {
 
     private static final int ROWS = 20;
 
     private IFinder client;
 
-    protected void setUp() throws Exception {
-        super.setUp();
-
+    @Before public void setUp() throws Exception {
         client = new Finder(new MockResultPage(), ROWS);
     }
 
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    @After public void tearDown() throws Exception {
     }
 
-    public void testDHJClientDefaultItemsPerPage() {
+    @Test public void testDHJClientDefaultItemsPerPage() {
         client = new Finder(new MockResultPage());
 
         assertNotNull(client);
@@ -35,7 +38,7 @@ public class DHJClientTest extends TestCase {
         assertEquals(0, client.getTotalPage());
     }
 
-    public void testDHJClient() {
+    @Test public void testDHJClient() {
         assertNotNull(client);
         assertEquals(20, client.getItemsPerPage());
         assertEquals(0, client.getResultCount());
@@ -46,7 +49,7 @@ public class DHJClientTest extends TestCase {
      * TODO: Should the parsed result be unit-tested? since it has no well defined structure :( ,
      * it might be a total waste of time
      */
-    public void testFind() {
+    @Test public void testFind() {
         ArrayList<Item> items = new ArrayList<Item>();
         try {
             items = client.find("kfc", ItemType.PRODUCT, 1);
@@ -57,7 +60,7 @@ public class DHJClientTest extends TestCase {
         assertEquals(20,items.size());
     }
 
-    public void testGetTotalPage() {
+    @Test public void testGetTotalPage() {
         assertEquals(0, client.getTotalPage());
 
         try {
@@ -69,7 +72,7 @@ public class DHJClientTest extends TestCase {
         assertEquals(4, client.getTotalPage());
     }
 
-    public void testGetResultCount() {
+    @Test public void testGetResultCount() {
         assertEquals(0, client.getResultCount());
 
         try {

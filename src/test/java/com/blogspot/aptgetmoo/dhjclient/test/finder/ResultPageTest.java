@@ -1,22 +1,26 @@
 package com.blogspot.aptgetmoo.dhjclient.test.finder;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 import com.blogspot.aptgetmoo.dhjclient.finder.ResultPage;
 
-public class ResultPageTest extends TestCase {
+public class ResultPageTest {
 
     private static final String SERVER_URL = "http://does.not.matter/halal.php";
 
-    public void testResultPageWithDefaultUrl() {
+    @Test public void testResultPageWithDefaultUrl() {
         ResultPage page = new ResultPage();
         assertNotNull(page);
     }
 
-    public void testResultPage() {
+    @Test public void testResultPage() {
         try {
             assertNotNull(new ResultPage(SERVER_URL));
         } catch (MalformedURLException e) {
@@ -24,7 +28,7 @@ public class ResultPageTest extends TestCase {
         }
     }
 
-    public void testResultPageExpectMalformedURLException() {
+    @Test public void testResultPageExpectMalformedURLException() {
         final String invalidUrl = "invalidUrl";
         try {
             new ResultPage(invalidUrl);
@@ -32,7 +36,7 @@ public class ResultPageTest extends TestCase {
         } catch (MalformedURLException e) {}
     }
 
-    public void testGetBaseUrl() {
+    @Test public void testGetBaseUrl() {
         ResultPage page;
         try {
             page = new ResultPage(SERVER_URL);
@@ -48,7 +52,7 @@ public class ResultPageTest extends TestCase {
     /**
      * Test setFetchParameters() and getUrl()
      */
-    public void testSetFetchParametersAndGetUrl() {
+    @Test public void testSetFetchParametersAndGetUrl() {
         String keyword = "kfc";
         String type = "P";
         int page = 1;
@@ -76,7 +80,7 @@ public class ResultPageTest extends TestCase {
         assertEquals("Failed to reset parameters (#setFetchParameters)", url, result.getUrl());
     }
 
-    public void testGetParseable() {
+    @Test public void testGetParseable() {
         String keyword = "kfc";
         String type = "P";
         int page = 1;
