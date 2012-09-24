@@ -1,4 +1,4 @@
-package com.blogspot.aptgetmoo.dhjclient;
+package com.blogspot.aptgetmoo.dhjclient.finder;
 
 import java.io.Serializable;
 

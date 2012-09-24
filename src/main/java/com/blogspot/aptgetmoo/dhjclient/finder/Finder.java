@@ -1,4 +1,4 @@
-package com.blogspot.aptgetmoo.dhjclient;
+package com.blogspot.aptgetmoo.dhjclient.finder;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import org.jsoup.select.Elements;
 /**
  * @author Dzul Nizam
  */
-public class DhjClient implements IDhjClient {
+public class Finder implements IFinder {
 
 	private final static int DEFAULT_ITEMS_PER_PAGE = 20;
 
@@ -24,12 +24,12 @@ public class DhjClient implements IDhjClient {
 
     private int mTotalResult;
 
-    public DhjClient(IResultPage pResultPage) {
+    public Finder(IResultPage pResultPage) {
         mResultPage = pResultPage;
         mItemsPerPage = DEFAULT_ITEMS_PER_PAGE;
     }
 
-    public DhjClient(IResultPage pResultPage, int pItemsPerPage) {
+    public Finder(IResultPage pResultPage, int pItemsPerPage) {
         mResultPage = pResultPage;
         mItemsPerPage = pItemsPerPage;
     }

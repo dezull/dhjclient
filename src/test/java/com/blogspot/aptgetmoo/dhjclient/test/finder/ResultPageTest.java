@@ -1,11 +1,11 @@
-package com.blogspot.aptgetmoo.dhjclient.test;
+package com.blogspot.aptgetmoo.dhjclient.test.finder;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 
 import junit.framework.TestCase;
 
-import com.blogspot.aptgetmoo.dhjclient.ResultPage;
+import com.blogspot.aptgetmoo.dhjclient.finder.ResultPage;
 
 public class ResultPageTest extends TestCase {
 

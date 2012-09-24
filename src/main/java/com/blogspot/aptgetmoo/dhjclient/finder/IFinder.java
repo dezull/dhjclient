@@ -1,4 +1,4 @@
-package com.blogspot.aptgetmoo.dhjclient;
+package com.blogspot.aptgetmoo.dhjclient.finder;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
  *
  * @author Dzul Nizam
  */
-public interface IDhjClient {
+public interface IFinder {
     /**
      * Get Item(s) by keyword, type & page. The maximum number of Item(s) per page retrieved depend highly on the Jakim Web :(
      *

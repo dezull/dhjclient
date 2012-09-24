@@ -1,25 +1,25 @@
-package com.blogspot.aptgetmoo.dhjclient.test;
+package com.blogspot.aptgetmoo.dhjclient.test.finder;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import junit.framework.TestCase;
 
-import com.blogspot.aptgetmoo.dhjclient.DhjClient;
-import com.blogspot.aptgetmoo.dhjclient.IDhjClient;
-import com.blogspot.aptgetmoo.dhjclient.Item;
-import com.blogspot.aptgetmoo.dhjclient.ItemType;
+import com.blogspot.aptgetmoo.dhjclient.finder.Finder;
+import com.blogspot.aptgetmoo.dhjclient.finder.IFinder;
+import com.blogspot.aptgetmoo.dhjclient.finder.Item;
+import com.blogspot.aptgetmoo.dhjclient.finder.ItemType;
 
 public class DHJClientTest extends TestCase {
 
 	private static final int ROWS = 20;
 
-	private IDhjClient client;
+	private IFinder client;
 
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		client = new DhjClient(new MockResultPage(), ROWS);
+		client = new Finder(new MockResultPage(), ROWS);
 	}
 
 	protected void tearDown() throws Exception {
@@ -27,7 +27,7 @@ public class DHJClientTest extends TestCase {
 	}
 
 	public void testDHJClientDefaultItemsPerPage() {
-		client = new DhjClient(new MockResultPage());
+		client = new Finder(new MockResultPage());
 
 		assertNotNull(client);
 		assertEquals(20, client.getItemsPerPage());
