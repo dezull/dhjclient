@@ -1,23 +1,29 @@
 package com.blogspot.aptgetmoo.dhjclient.test.company;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.net.MalformedURLException;
 
-import junit.framework.TestCase;
+import org.junit.Test;
 
 import com.blogspot.aptgetmoo.dhjclient.company.CompanyPage;
 import com.blogspot.aptgetmoo.dhjclient.parser.Webpage;
 
-public class CompanyPageTest extends TestCase {
+public class CompanyPageTest {
 
     private static final String COMP_CODE_1 = "COMP-CODE-1234";
 
-    public void testConstructor() {
+    @Test public void testConstructor() {
         Webpage page = new CompanyPage(COMP_CODE_1);
 
         assertNotNull(page);
     }
 
-    public void testConstructorWithValidUrl() {
+    @Test public void testConstructorWithValidUrl() {
         final String validUrl = "http://www.google.com";
         Webpage page;
 
@@ -29,7 +35,7 @@ public class CompanyPageTest extends TestCase {
         }
     }
 
-    public void testConstructorWithInvalidUrl() {
+    @Test public void testConstructorWithInvalidUrl() {
         final String invalidUrl = "invalidUrl";
 
         try {
@@ -38,13 +44,13 @@ public class CompanyPageTest extends TestCase {
         } catch (MalformedURLException e) {}
     }
 
-    public void testGetBaseUrlDefault() {
+    @Test public void testGetBaseUrlDefault() {
         Webpage page = new CompanyPage(COMP_CODE_1);
 
         assertNotNull(page.getBaseUrl());
     }
 
-    public void testGetBaseUrlCustom() {
+    @Test public void testGetBaseUrlCustom() {
         final String validUrl = "http://www.google.com";
         Webpage page;
 
@@ -56,7 +62,7 @@ public class CompanyPageTest extends TestCase {
         }
     }
 
-    public void testGetUrlDefault() {
+    @Test public void testGetUrlDefault() {
         Webpage page = new CompanyPage(COMP_CODE_1);
         final String baseUrl = page.getBaseUrl();
         final String url = page.getUrl();
@@ -65,7 +71,7 @@ public class CompanyPageTest extends TestCase {
         assertTrue(url.startsWith(baseUrl));
     }
 
-    public void testGetUrlDefaultCustom() {
+    @Test public void testGetUrlDefaultCustom() {
         final String validUrl = "http://www.google.com";
         Webpage page;
 
@@ -82,13 +88,13 @@ public class CompanyPageTest extends TestCase {
         }
     }
 
-    public void testGetCompanyCode() {
+    @Test public void testGetCompanyCode() {
         Webpage page = new CompanyPage(COMP_CODE_1);
 
         assertEquals(COMP_CODE_1, ((CompanyPage) page).getCompanyCode());
     }
 
-    public void testGetCompanyCodeCustome() {
+    @Test public void testGetCompanyCodeCustome() {
         final String validUrl = "http://www.google.com";
 
         Webpage page;
