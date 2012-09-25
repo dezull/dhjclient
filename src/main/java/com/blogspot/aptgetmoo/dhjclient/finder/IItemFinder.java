@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Client for retrieving results from Jakim's Halal Web
+ * Client for retrieving items (eg: product, premises, etc) from Jakim's Halal Web search result
  *
  * @author Dzul Nizam
  */
-public interface IFinder {
+public interface IItemFinder {
     /**
      * Get Item(s) by keyword, type & page. The maximum number of Item(s) per page retrieved depend highly on the Jakim Web :(
      *

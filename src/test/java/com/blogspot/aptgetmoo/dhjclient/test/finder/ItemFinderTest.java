@@ -11,26 +11,26 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.blogspot.aptgetmoo.dhjclient.finder.Finder;
-import com.blogspot.aptgetmoo.dhjclient.finder.IFinder;
+import com.blogspot.aptgetmoo.dhjclient.finder.ItemFinder;
+import com.blogspot.aptgetmoo.dhjclient.finder.IItemFinder;
 import com.blogspot.aptgetmoo.dhjclient.finder.Item;
 import com.blogspot.aptgetmoo.dhjclient.finder.ItemType;
 
-public class DHJClientTest {
+public class ItemFinderTest {
 
     private static final int ROWS = 20;
 
-    private IFinder client;
+    private IItemFinder client;
 
     @Before public void setUp() throws Exception {
-        client = new Finder(new MockResultPage(), ROWS);
+        client = new ItemFinder(new MockResultPage(), ROWS);
     }
 
     @After public void tearDown() throws Exception {
     }
 
     @Test public void testDHJClientDefaultItemsPerPage() {
-        client = new Finder(new MockResultPage());
+        client = new ItemFinder(new MockResultPage());
 
         assertNotNull(client);
         assertEquals(20, client.getItemsPerPage());

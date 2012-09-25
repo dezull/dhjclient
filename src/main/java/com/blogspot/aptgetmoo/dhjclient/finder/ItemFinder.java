@@ -14,7 +14,7 @@ import com.blogspot.aptgetmoo.dhjclient.parser.Webpage;
 /**
  * @author Dzul Nizam
  */
-public class Finder implements IFinder {
+public class ItemFinder implements IItemFinder {
 
     private final static int DEFAULT_ITEMS_PER_PAGE = 20;
 
@@ -26,12 +26,12 @@ public class Finder implements IFinder {
 
     private int mTotalResult;
 
-    public Finder(Webpage pResultPage) {
+    public ItemFinder(Webpage pResultPage) {
         mResultPage = pResultPage;
         mItemsPerPage = DEFAULT_ITEMS_PER_PAGE;
     }
 
-    public Finder(Webpage pResultPage, int pItemsPerPage) {
+    public ItemFinder(Webpage pResultPage, int pItemsPerPage) {
         mResultPage = pResultPage;
         mItemsPerPage = pItemsPerPage;
     }
