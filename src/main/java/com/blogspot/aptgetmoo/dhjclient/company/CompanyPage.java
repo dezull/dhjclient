@@ -1,5 +1,6 @@
 package com.blogspot.aptgetmoo.dhjclient.company;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -20,23 +21,20 @@ public class CompanyPage extends Webpage {
      * @see #CompanyPage(String)
      * @see #getBaseUrl()
      */
-    public CompanyPage(String pCompanyCode) {
+    public CompanyPage() {
         try {
             mBaseUrl = new URL(DEFAULT_BASE_URL);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-
-        mCompanyCode = pCompanyCode;
     }
 
     /**
      * @param pBaseUrl Base URL for Jakim's search result page
      * @throws MalformedURLException If given URL is invalid
      */
-    public CompanyPage(String pBaseUrl, String pCompanyCode) throws MalformedURLException {
+    public CompanyPage(String pBaseUrl) throws MalformedURLException {
         mBaseUrl = new URL(pBaseUrl);
-        mCompanyCode = pCompanyCode;
     }
 
     @Override
@@ -49,8 +47,23 @@ public class CompanyPage extends Webpage {
         return getBaseUrl() + "?comp_code=" + mCompanyCode;
     }
 
+    @Override
+    public String getParseable() throws IOException {
+    	final String companyCode = getCompanyCode();
+
+    	if (companyCode == null || companyCode.trim().isEmpty()) {
+    		throw new IOException("getCompanyCode() returns null or is empty");
+    	}
+
+    	return super.getParseable();
+    }
+
     public String getCompanyCode() {
         return mCompanyCode;
+    }
+
+    public void setCompanyCode(String pCompanyCode) {
+    	mCompanyCode = pCompanyCode;
     }
 
 }

@@ -8,13 +8,18 @@ import com.blogspot.aptgetmoo.dhjclient.company.CompanyPage;
 
 public class MockCompanyPage extends CompanyPage {
 
-    public MockCompanyPage(String pCompanyCode) {
-        super(pCompanyCode);
+    public MockCompanyPage() {
+        super();
     }
 
     @Override
     public String getParseable() {
-        InputStream is = getClass().getResourceAsStream("/" + getCompanyCode() + ".html");
+    	Class<? extends MockCompanyPage> cls = getClass();
+        InputStream is = cls.getResourceAsStream("/" + getCompanyCode() + ".html");
+
+        if (is == null) {
+        	is = cls.getResourceAsStream("/COMP-not-found.html");
+        }
 
         try {
             return new Scanner(is).useDelimiter("\\A").next();

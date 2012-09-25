@@ -2,7 +2,7 @@ package com.blogspot.aptgetmoo.dhjclient.test.company;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertNull;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -15,33 +15,37 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.blogspot.aptgetmoo.dhjclient.company.Company;
+import com.blogspot.aptgetmoo.dhjclient.company.CompanyFinder;
+import com.blogspot.aptgetmoo.dhjclient.company.ICompanyFinder;
 
 @RunWith(Parameterized.class)
-public class CompanyTest {
+public class CompanyFinderTest {
 
-    private Company mCompany;
+	private static final String NULL_COMPANY = "COMP-DOES-NOT-EXISTS";
 
-    private String mCompanyCode;
-
-    private String mCompanyName;
+    private ICompanyFinder mFinder;
 
     private Company mParsedCompany;
 
-    private String mAddress;
+    private String mComCode;
 
-    private String mPhone;
+    private String mComName;
 
-    private String mFax;
+    private String mComAddress;
 
-    private String mEmail;
+    private String mComPhone;
 
-    private String mWeb;
+    private String mComFax;
 
-    private Object mJakimRefNo;
+    private String mComEmail;
 
-    private Object mJakimRefOfficer;
+    private String mComWeb;
 
-    public CompanyTest(
+    private Object mComJakimRefNo;
+
+    private Object mComJakimRefOfficer;
+
+    public CompanyFinderTest(
             String pCompanyCode,
             String pCompanyName,
             String pAddress,
@@ -52,15 +56,15 @@ public class CompanyTest {
             String pJakimRefNo,
             String pJakimRefOfficer) {
 
-        mCompanyCode = pCompanyCode;
-        mCompanyName = pCompanyName;
-        mAddress = pAddress;
-        mPhone = pPhone;
-        mFax = pFax;
-        mEmail = pEmail;
-        mWeb = pWeb;
-        mJakimRefNo = pJakimRefNo;
-        mJakimRefOfficer = pJakimRefOfficer;
+        mComCode = pCompanyCode;
+        mComName = pCompanyName;
+        mComAddress = pAddress;
+        mComPhone = pPhone;
+        mComFax = pFax;
+        mComEmail = pEmail;
+        mComWeb = pWeb;
+        mComJakimRefNo = pJakimRefNo;
+        mComJakimRefOfficer = pJakimRefOfficer;
     }
 
      @Parameters
@@ -87,61 +91,49 @@ public class CompanyTest {
                         "-",
                         "JAKIM/(S)/(22.00)/492/2/ 2 001-07/2004 (SK.1)",
                         "Mohd Roslan Mohd Saludin"
+                    },
+                    {
+                    	NULL_COMPANY,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
                     }
                 };
         return Arrays.asList(data);
      }
 
     @Before public void setUp() throws Exception {
-        mCompany = new Company(new MockCompanyPage(mCompanyCode));
-        mParsedCompany = mCompany.parse();
+        mFinder = new CompanyFinder(new MockCompanyPage());
+        mParsedCompany = mFinder.find(mComCode);
     }
 
     @After public void tearDown() throws Exception {
     }
 
     @Test public void constructor() {
-        assertNotNull(mCompany);
+        assertNotNull(mFinder);
     }
 
-    @Test public void parse() {
-        assertSame(mParsedCompany, mCompany);
-    }
-
-    @Test public void testGetCompanyCode() {
-        assertEquals(mCompanyCode, mParsedCompany.getCompanyCode());
-    }
-
-    @Test public void testGetCompanyName() {
-        assertEquals(mCompanyName, mParsedCompany.getCompanyName());
-    }
-
-    @Test public void testGetAddress() {
-        assertEquals(mAddress, mParsedCompany.getAddress());
-    }
-
-    @Test public void testGetPhone() {
-        assertEquals(mPhone, mParsedCompany.getPhone());
-    }
-
-    @Test public void testGetFax() {
-        assertEquals(mFax, mParsedCompany.getFax());
-    }
-
-    @Test public void testGetEmail() {
-        assertEquals(mEmail, mParsedCompany.getEmail());
-    }
-
-    @Test public void testGetWeb() {
-        assertEquals(mWeb, mParsedCompany.getWeb());
-    }
-
-    @Test public void testGetJakimRefNo() {
-        assertEquals(mJakimRefNo, mParsedCompany.getJakimRefNo());
-    }
-
-    @Test public void testGetJakimOfficer() {
-        assertEquals(mJakimRefOfficer, mParsedCompany.getJakimOfficer());
+    @Test public void find() {
+    	if (mComCode.compareTo(NULL_COMPANY) != 0) {
+	        assertNotNull(mParsedCompany);
+	        assertEquals(mComCode, mParsedCompany.code);
+	        assertEquals(mComName, mParsedCompany.name);
+	        assertEquals(mComAddress, mParsedCompany.address);
+	        assertEquals(mComPhone, mParsedCompany.phone);
+	        assertEquals(mComFax, mParsedCompany.fax);
+	        assertEquals(mComEmail, mParsedCompany.email);
+	        assertEquals(mComWeb, mParsedCompany.web);
+	        assertEquals(mComJakimRefNo, mParsedCompany.jakimRefNo);
+	        assertEquals(mComJakimRefOfficer, mParsedCompany.jakimOfficer);
+    	} else {
+    		assertNull(mParsedCompany);
+    	}
     }
 
 }
