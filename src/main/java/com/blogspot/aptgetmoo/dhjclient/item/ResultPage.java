@@ -1,4 +1,4 @@
-package com.blogspot.aptgetmoo.dhjclient.finder;
+package com.blogspot.aptgetmoo.dhjclient.item;
 
 import java.net.MalformedURLException;
 import java.net.URL;

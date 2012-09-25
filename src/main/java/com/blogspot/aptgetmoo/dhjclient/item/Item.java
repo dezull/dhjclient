@@ -1,4 +1,4 @@
-package com.blogspot.aptgetmoo.dhjclient.finder;
+package com.blogspot.aptgetmoo.dhjclient.item;
 
 /**
  * Holds a row of result from Jakim's Halal Web

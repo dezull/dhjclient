@@ -1,11 +1,11 @@
-package com.blogspot.aptgetmoo.dhjclient.test.finder;
+package com.blogspot.aptgetmoo.dhjclient.test.item;
 
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import com.blogspot.aptgetmoo.dhjclient.finder.ResultPage;
+import com.blogspot.aptgetmoo.dhjclient.item.ResultPage;
 
 public class MockResultPage extends ResultPage {
 

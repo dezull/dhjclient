@@ -1,4 +1,4 @@
-package com.blogspot.aptgetmoo.dhjclient.test.finder;
+package com.blogspot.aptgetmoo.dhjclient.test.item;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -11,10 +11,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.blogspot.aptgetmoo.dhjclient.finder.ItemFinder;
-import com.blogspot.aptgetmoo.dhjclient.finder.IItemFinder;
-import com.blogspot.aptgetmoo.dhjclient.finder.Item;
-import com.blogspot.aptgetmoo.dhjclient.finder.ItemType;
+import com.blogspot.aptgetmoo.dhjclient.item.IItemFinder;
+import com.blogspot.aptgetmoo.dhjclient.item.Item;
+import com.blogspot.aptgetmoo.dhjclient.item.ItemFinder;
+import com.blogspot.aptgetmoo.dhjclient.item.ItemType;
 
 public class ItemFinderTest {
 

@@ -1,4 +1,4 @@
-package com.blogspot.aptgetmoo.dhjclient.test.finder;
+package com.blogspot.aptgetmoo.dhjclient.test.item;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -9,7 +9,7 @@ import java.net.MalformedURLException;
 
 import org.junit.Test;
 
-import com.blogspot.aptgetmoo.dhjclient.finder.ResultPage;
+import com.blogspot.aptgetmoo.dhjclient.item.ResultPage;
 
 public class ResultPageTest {
 

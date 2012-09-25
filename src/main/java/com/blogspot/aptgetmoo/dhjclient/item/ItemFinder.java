@@ -1,4 +1,4 @@
-package com.blogspot.aptgetmoo.dhjclient.finder;
+package com.blogspot.aptgetmoo.dhjclient.item;
 
 import java.io.IOException;
 import java.util.ArrayList;
