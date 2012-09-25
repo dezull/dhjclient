@@ -16,14 +16,14 @@ public class CompanyPageTest {
 
     private static final String COMP_CODE_1 = "COMP-CODE-1234";
 
-    @Test public void testConstructor() {
+    @Test public void constructor() {
         CompanyPage page = new CompanyPage();
         page.setCompanyCode(COMP_CODE_1);
 
         assertNotNull(page);
     }
 
-    @Test public void testConstructorWithValidUrl() {
+    @Test public void constructorWithValidUrl() {
         final String validUrl = "http://www.google.com";
         CompanyPage page;
 
@@ -36,7 +36,7 @@ public class CompanyPageTest {
         }
     }
 
-    @Test public void testConstructorWithInvalidUrl() {
+    @Test public void constructorWithInvalidUrl() {
         final String invalidUrl = "invalidUrl";
 
         try {
@@ -45,14 +45,14 @@ public class CompanyPageTest {
         } catch (MalformedURLException e) {}
     }
 
-    @Test public void testGetBaseUrlDefault() {
+    @Test public void getBaseUrlDefault() {
     	CompanyPage page = new CompanyPage();
         page.setCompanyCode(COMP_CODE_1);
 
         assertNotNull(page.getBaseUrl());
     }
 
-    @Test public void testGetBaseUrlCustom() {
+    @Test public void getBaseUrlCustom() {
         final String validUrl = "http://www.google.com";
         CompanyPage page;
 
@@ -64,7 +64,7 @@ public class CompanyPageTest {
         }
     }
 
-    @Test public void testGetUrlDefault() {
+    @Test public void getUrlDefault() {
     	CompanyPage page = new CompanyPage();
         page.setCompanyCode(COMP_CODE_1);
         final String baseUrl = page.getBaseUrl();
@@ -74,7 +74,7 @@ public class CompanyPageTest {
         assertTrue(url.startsWith(baseUrl));
     }
 
-    @Test public void testGetUrlDefaultCustom() {
+    @Test public void getUrlDefaultCustom() {
         final String validUrl = "http://www.google.com";
         CompanyPage page;
 

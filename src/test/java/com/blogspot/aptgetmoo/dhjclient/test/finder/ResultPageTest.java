@@ -15,12 +15,12 @@ public class ResultPageTest {
 
     private static final String SERVER_URL = "http://does.not.matter/halal.php";
 
-    @Test public void testResultPageWithDefaultUrl() {
+    @Test public void constructorWithDefaultUrl() {
         ResultPage page = new ResultPage();
         assertNotNull(page);
     }
 
-    @Test public void testResultPage() {
+    @Test public void constructor() {
         try {
             assertNotNull(new ResultPage(SERVER_URL));
         } catch (MalformedURLException e) {
@@ -28,7 +28,7 @@ public class ResultPageTest {
         }
     }
 
-    @Test public void testResultPageExpectMalformedURLException() {
+    @Test public void constructorExpectMalformedURLException() {
         final String invalidUrl = "invalidUrl";
         try {
             new ResultPage(invalidUrl);
@@ -36,7 +36,7 @@ public class ResultPageTest {
         } catch (MalformedURLException e) {}
     }
 
-    @Test public void testGetBaseUrl() {
+    @Test public void getBaseUrl() {
         ResultPage page;
         try {
             page = new ResultPage(SERVER_URL);
@@ -52,7 +52,7 @@ public class ResultPageTest {
     /**
      * Test setFetchParameters() and getUrl()
      */
-    @Test public void testSetFetchParametersAndGetUrl() {
+    @Test public void setFetchParametersAndGetUrl() {
         String keyword = "kfc";
         String type = "P";
         int page = 1;
@@ -80,7 +80,7 @@ public class ResultPageTest {
         assertEquals("Failed to reset parameters (#setFetchParameters)", url, result.getUrl());
     }
 
-    @Test public void testGetParseable() {
+    @Test public void getParseable() {
         String keyword = "kfc";
         String type = "P";
         int page = 1;

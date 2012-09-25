@@ -20,39 +20,39 @@ public class ItemFinderTest {
 
     private static final int ROWS = 20;
 
-    private IItemFinder client;
+    private IItemFinder mFinder;
 
     @Before public void setUp() throws Exception {
-        client = new ItemFinder(new MockResultPage(), ROWS);
+        mFinder = new ItemFinder(new MockResultPage(), ROWS);
     }
 
     @After public void tearDown() throws Exception {
     }
 
-    @Test public void testDHJClientDefaultItemsPerPage() {
-        client = new ItemFinder(new MockResultPage());
+    @Test public void constructorDefaultItemsPerPage() {
+        mFinder = new ItemFinder(new MockResultPage());
 
-        assertNotNull(client);
-        assertEquals(20, client.getItemsPerPage());
-        assertEquals(0, client.getResultCount());
-        assertEquals(0, client.getTotalPage());
+        assertNotNull(mFinder);
+        assertEquals(20, mFinder.getItemsPerPage());
+        assertEquals(0, mFinder.getResultCount());
+        assertEquals(0, mFinder.getTotalPage());
     }
 
-    @Test public void testDHJClient() {
-        assertNotNull(client);
-        assertEquals(20, client.getItemsPerPage());
-        assertEquals(0, client.getResultCount());
-        assertEquals(0, client.getTotalPage());
+    @Test public void constructor() {
+        assertNotNull(mFinder);
+        assertEquals(20, mFinder.getItemsPerPage());
+        assertEquals(0, mFinder.getResultCount());
+        assertEquals(0, mFinder.getTotalPage());
     }
 
     /**
      * TODO: Should the parsed result be unit-tested? since it has no well defined structure :( ,
      * it might be a total waste of time
      */
-    @Test public void testFind() {
+    @Test public void find() {
         ArrayList<Item> items = new ArrayList<Item>();
         try {
-            items = client.find("kfc", ItemType.PRODUCT, 1);
+            items = mFinder.find("kfc", ItemType.PRODUCT, 1);
         } catch (IOException e) {
             fail("Unexpected IOException");
         }
@@ -60,28 +60,28 @@ public class ItemFinderTest {
         assertEquals(20,items.size());
     }
 
-    @Test public void testGetTotalPage() {
-        assertEquals(0, client.getTotalPage());
+    @Test public void getTotalPage() {
+        assertEquals(0, mFinder.getTotalPage());
 
         try {
-            client.find("kfc", ItemType.PRODUCT, 1);
+            mFinder.find("kfc", ItemType.PRODUCT, 1);
         } catch (IOException e) {
             fail("Unexpected IOException");
         }
 
-        assertEquals(4, client.getTotalPage());
+        assertEquals(4, mFinder.getTotalPage());
     }
 
-    @Test public void testGetResultCount() {
-        assertEquals(0, client.getResultCount());
+    @Test public void getResultCount() {
+        assertEquals(0, mFinder.getResultCount());
 
         try {
-            client.find("kfc", ItemType.PRODUCT, 1);
+            mFinder.find("kfc", ItemType.PRODUCT, 1);
         } catch (IOException e) {
             fail("Unexpected IOException");
         }
 
-        assertEquals(69, client.getResultCount());
+        assertEquals(69, mFinder.getResultCount());
     }
 
 }
