@@ -29,7 +29,7 @@ public class ItemFinderTest {
     @After public void tearDown() throws Exception {
     }
 
-    @Test public void constructorDefaultItemsPerPage() {
+    @Test public void constructorWithResultPage() {
         mFinder = new ItemFinder(new MockResultPage());
 
         assertNotNull(mFinder);
