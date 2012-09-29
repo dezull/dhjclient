@@ -30,8 +30,13 @@ public class ResultPage extends Webpage {
      * @see #ResultPage(String)
      * @see #getBaseUrl()
      */
-    public ResultPage() throws URISyntaxException {
-        mBaseUrl = new URI(DEFAULT_BASE_URL);
+    public ResultPage() {
+        try {
+            mBaseUrl = new URI(DEFAULT_BASE_URL);
+        } catch (URISyntaxException e) {
+            // default URL should not throw URISyntaxException
+            e.printStackTrace();
+        }
     }
 
     /**

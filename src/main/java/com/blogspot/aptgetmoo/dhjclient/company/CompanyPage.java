@@ -31,8 +31,13 @@ public class CompanyPage extends Webpage {
      * @see #CompanyPage(String)
      * @see #getBaseUrl()
      */
-    public CompanyPage() throws URISyntaxException {
-        mBaseUrl = new URI(DEFAULT_BASE_URL);
+    public CompanyPage() {
+        try {
+            mBaseUrl = new URI(DEFAULT_BASE_URL);
+        } catch (URISyntaxException e) {
+            // default URL should not throw URISyntaxException
+            e.printStackTrace();
+        }
     }
 
     /**
