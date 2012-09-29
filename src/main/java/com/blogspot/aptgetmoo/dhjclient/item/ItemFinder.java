@@ -1,6 +1,7 @@
 package com.blogspot.aptgetmoo.dhjclient.item;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import org.jsoup.Jsoup;
@@ -73,7 +74,11 @@ public class ItemFinder implements IItemFinder {
         Document doc = null;
         ArrayList<Item> dataHolders = null;
 
-        ((ResultPage) mResultPage).setFetchParameters(keyword, type.getQueryStr(), page);
+        try {
+            ((ResultPage) mResultPage).setFetchParameters(keyword, type.getQueryStr(), page);
+        } catch (URISyntaxException e) {
+            throw new IOException(e);
+        }
         doc = Jsoup.parse(mResultPage.getParseable());
 
         dataHolders = new ArrayList<Item>();

@@ -1,8 +1,10 @@
 package com.blogspot.aptgetmoo.dhjclient.company;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import org.apache.http.client.utils.URIBuilder;
 
 import com.blogspot.aptgetmoo.dhjclient.parser.Webpage;
 
@@ -11,7 +13,9 @@ public class CompanyPage extends Webpage {
     private final static String DEFAULT_BASE_URL =
             "http://www.halal.gov.my/ehalal/directory/slm_viewdetail.php";
 
-    private URL mBaseUrl;
+    private URI mBaseUrl;
+
+    private URI mUrl;
 
     private String mCompanyCode;
 
@@ -21,20 +25,16 @@ public class CompanyPage extends Webpage {
      * @see #CompanyPage(String)
      * @see #getBaseUrl()
      */
-    public CompanyPage() {
-        try {
-            mBaseUrl = new URL(DEFAULT_BASE_URL);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+    public CompanyPage() throws URISyntaxException {
+        mBaseUrl = new URI(DEFAULT_BASE_URL);
     }
 
     /**
      * @param pBaseUrl Base URL for Jakim's search result page
-     * @throws MalformedURLException If given URL is invalid
+     * @throws URISyntaxException If given URL is invalid
      */
-    public CompanyPage(String pBaseUrl) throws MalformedURLException {
-        mBaseUrl = new URL(pBaseUrl);
+    public CompanyPage(String pBaseUrl) throws URISyntaxException {
+        mBaseUrl = new URI(pBaseUrl);
     }
 
     @Override
@@ -44,7 +44,7 @@ public class CompanyPage extends Webpage {
 
     @Override
     public String getUrl() {
-        return getBaseUrl() + "?comp_code=" + mCompanyCode;
+        return mUrl.toString();
     }
 
     @Override
@@ -62,12 +62,24 @@ public class CompanyPage extends Webpage {
         return super.getParseable();
     }
 
+    /**
+     * @return Company code
+     */
     public String getCompanyCode() {
         return mCompanyCode;
     }
 
-    public void setCompanyCode(String pCompanyCode) {
+    /**
+     * @param pCompanyCode Company code
+     * @throws URISyntaxException
+     */
+    public void setCompanyCode(String pCompanyCode) throws URISyntaxException {
         mCompanyCode = pCompanyCode;
+
+        URIBuilder builder = new URIBuilder(mBaseUrl);
+        builder.addParameter("comp_code", mCompanyCode);
+
+        mUrl = builder.build();
     }
 
 }

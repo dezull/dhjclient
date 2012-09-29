@@ -1,6 +1,7 @@
 package com.blogspot.aptgetmoo.dhjclient.company;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -19,12 +20,16 @@ public class CompanyFinder implements ICompanyFinder {
 
     @Override
     public Company find(String pCompCode) throws IOException {
-        ((CompanyPage) mPage).setCompanyCode(pCompCode);
+        try {
+            ((CompanyPage) mPage).setCompanyCode(pCompCode);
+        } catch (URISyntaxException e) {
+            throw new IOException(e);
+        }
+
         Document doc;
-
         doc = Jsoup.parse(mPage.getParseable());
-
         Company company = new Company(pCompCode);
+
         if (doc != null) {
             company = parseRows(company, doc.select("table table tr"));
         }

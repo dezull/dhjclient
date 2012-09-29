@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import org.junit.After;
@@ -29,7 +30,7 @@ public class ItemFinderTest {
     @After public void tearDown() throws Exception {
     }
 
-    @Test public void constructorWithResultPage() {
+    @Test public void constructorWithResultPage() throws URISyntaxException {
         mFinder = new ItemFinder(new MockResultPage());
 
         assertNotNull(mFinder);
