@@ -5,3 +5,7 @@ A rather ugly approach to retrieving and parsing data from, [Direktori Halal Jak
 ## Dependencies
 
 Please, just use maven.
+
+## Usage
+
+See tests in src/test/java, specifically CompanyFinderTest & ItemFinderTest classes.
