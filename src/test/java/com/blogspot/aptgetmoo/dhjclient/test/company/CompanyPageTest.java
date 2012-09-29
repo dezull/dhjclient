@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.net.MalformedURLException;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -16,7 +16,7 @@ public class CompanyPageTest {
 
     private static final String COMP_CODE_1 = "COMP-CODE-1234";
 
-    @Test public void constructor() throws URISyntaxException {
+    @Test public void constructor() throws MalformedURLException {
         CompanyPage page = new CompanyPage();
         page.setCompanyCode(COMP_CODE_1);
 
@@ -30,8 +30,8 @@ public class CompanyPageTest {
         try {
             page = new CompanyPage(validUrl);
             assertNotNull(page);
-        } catch (URISyntaxException e) {
-            fail("Unexpected URISyntaxException");
+        } catch (MalformedURLException e) {
+            fail("Unexpected MalformedURLException");
         }
     }
 
@@ -40,17 +40,17 @@ public class CompanyPageTest {
 
         try {
             new CompanyPage(invalidUrl);
-            fail("Expected URISyntaxException");
-        } catch (URISyntaxException e) {}
+            fail("Expected MalformedURLException");
+        } catch (MalformedURLException e) {}
     }
 
-    @Test public void getBaseUrlDefault() throws URISyntaxException {
+    @Test public void getBaseUrlDefault() throws MalformedURLException {
         CompanyPage page = new CompanyPage();
 
         try {
             page.setCompanyCode(COMP_CODE_1);
-        } catch (URISyntaxException e) {
-            fail("Unexpected URISyntaxException");
+        } catch (MalformedURLException e) {
+            fail("Unexpected MalformedURLException");
         }
 
         assertNotNull(page.getBaseUrl());
@@ -63,12 +63,12 @@ public class CompanyPageTest {
         try {
             page = new CompanyPage(validUrl);
             assertEquals(validUrl, page.getBaseUrl());
-        } catch (URISyntaxException e) {
-            fail("Unexpected URISyntaxException");
+        } catch (MalformedURLException e) {
+            fail("Unexpected MalformedURLException");
         }
     }
 
-    @Test public void getUrlDefault() throws URISyntaxException {
+    @Test public void getUrlDefault() throws MalformedURLException {
         CompanyPage page = new CompanyPage();
         page.setCompanyCode(COMP_CODE_1);
         final String baseUrl = page.getBaseUrl();
@@ -77,7 +77,7 @@ public class CompanyPageTest {
         assertEquals(url, baseUrl + "?comp_code=" + COMP_CODE_1);
     }
 
-    @Test public void getUrlDefaultCustom() throws URISyntaxException {
+    @Test public void getUrlDefaultCustom() throws MalformedURLException {
         final String validUrl = "http://www.google.com";
         CompanyPage page = new CompanyPage(validUrl);
         page.setCompanyCode(COMP_CODE_1);
@@ -89,7 +89,7 @@ public class CompanyPageTest {
     }
 
     @Ignore("Potentially long running HTTP request")
-    @Test public void getParseableValidCompCode() throws URISyntaxException {
+    @Test public void getParseableValidCompCode() throws MalformedURLException {
         CompanyPage page = new CompanyPage();;
         page.setCompanyCode(COMP_CODE_1);
 
@@ -100,7 +100,7 @@ public class CompanyPageTest {
         }
     }
 
-    @Test public void getParseableInvalidCompCode() throws URISyntaxException {
+    @Test public void getParseableInvalidCompCode() throws MalformedURLException {
         final String invalidCompCode = "COMP=CODE=1234";
         CompanyPage page = new CompanyPage();
         page.setCompanyCode(invalidCompCode);

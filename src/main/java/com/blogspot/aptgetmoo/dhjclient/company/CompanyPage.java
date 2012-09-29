@@ -1,10 +1,10 @@
 package com.blogspot.aptgetmoo.dhjclient.company;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-
-import org.apache.http.client.utils.URIBuilder;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 
 import com.blogspot.aptgetmoo.dhjclient.parser.Webpage;
 
@@ -18,9 +18,9 @@ public class CompanyPage extends Webpage {
     private final static String DEFAULT_BASE_URL =
             "http://www.halal.gov.my/ehalal/directory/slm_viewdetail.php";
 
-    private URI mBaseUrl;
+    private URL mBaseUrl;
 
-    private URI mUrl;
+    private URL mUrl;
 
     private String mCompanyCode;
 
@@ -33,19 +33,19 @@ public class CompanyPage extends Webpage {
      */
     public CompanyPage() {
         try {
-            mBaseUrl = new URI(DEFAULT_BASE_URL);
-        } catch (URISyntaxException e) {
-            // default URL should not throw URISyntaxException
+            mBaseUrl = new URL(DEFAULT_BASE_URL);
+        } catch (MalformedURLException e) {
+            // default URL should not throw MalformedURLException
             e.printStackTrace();
         }
     }
 
     /**
-     * @param 	pBaseUrl			Base URL for Jakim's search result page
-     * @throws 	URISyntaxException 	If given URL is invalid
+     * @param 	pBaseUrl				Base URL for Jakim's search result page
+     * @throws 	MalformedURLException 	If given URL is invalid
      */
-    public CompanyPage(String pBaseUrl) throws URISyntaxException {
-        mBaseUrl = new URI(pBaseUrl);
+    public CompanyPage(String pBaseUrl) throws MalformedURLException {
+        mBaseUrl = new URL(pBaseUrl);
     }
 
     @Override
@@ -82,15 +82,17 @@ public class CompanyPage extends Webpage {
 
     /**
      * @param 	pCompanyCode Company code
-     * @throws 	URISyntaxException
+     * @throws MalformedURLException
      */
-    public void setCompanyCode(String pCompanyCode) throws URISyntaxException {
+    public void setCompanyCode(String pCompanyCode) throws MalformedURLException {
         mCompanyCode = pCompanyCode;
 
-        URIBuilder builder = new URIBuilder(mBaseUrl);
-        builder.addParameter("comp_code", mCompanyCode);
-
-        mUrl = builder.build();
+        try {
+            mUrl = new URL(mBaseUrl.toString() + "?comp_code="
+                    + URLEncoder.encode(mCompanyCode, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
 }

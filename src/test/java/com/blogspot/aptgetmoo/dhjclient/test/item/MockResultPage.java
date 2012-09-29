@@ -2,6 +2,7 @@ package com.blogspot.aptgetmoo.dhjclient.test.item;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -18,7 +19,7 @@ public class MockResultPage extends ResultPage {
      * @param pUrl URL will be ignored.
      * @throws URISyntaxException
      */
-    public MockResultPage(String pUrl) throws URISyntaxException {
+    public MockResultPage(String pUrl) throws MalformedURLException {
         super(pUrl);
     }
 

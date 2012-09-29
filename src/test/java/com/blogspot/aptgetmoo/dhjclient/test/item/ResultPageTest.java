@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
+import java.net.MalformedURLException;
 
 import org.junit.Test;
 
@@ -15,24 +15,24 @@ public class ResultPageTest {
 
     private static final String SERVER_URL = "http://does.not.matter/halal.php";
 
-    @Test public void constructorWithDefaultUrl() throws URISyntaxException {
+    @Test public void constructorWithDefaultUrl() throws MalformedURLException {
         ResultPage page = new ResultPage();
         assertNotNull(page);
     }
 
-    @Test public void constructor() throws URISyntaxException {
+    @Test public void constructor() throws MalformedURLException {
         assertNotNull(new ResultPage(SERVER_URL));
     }
 
-    @Test public void constructorExpectURISyntaxException() {
+    @Test public void constructorExpectMalformedURLException() {
         final String invalidUrl = ":invalidUrl";
         try {
             new ResultPage(invalidUrl);
-            fail("Expected URISyntaxException");
-        } catch (URISyntaxException e) {}
+            fail("Expected MalformedURLException");
+        } catch (MalformedURLException e) {}
     }
 
-    @Test public void getBaseUrl() throws URISyntaxException {
+    @Test public void getBaseUrl() throws MalformedURLException {
         ResultPage page = new ResultPage(SERVER_URL);
         assertEquals(SERVER_URL, page.getBaseUrl());
 
@@ -42,9 +42,9 @@ public class ResultPageTest {
 
     /**
      * Test setFetchParameters() and getUrl()
-     * @throws URISyntaxException
+     * @throws MalformedURLException
      */
-    @Test public void setFetchParametersAndGetUrl() throws URISyntaxException {
+    @Test public void setFetchParametersAndGetUrl() throws MalformedURLException {
         String keyword = "kfc";
         String type = "P";
         int page = 1;
@@ -54,8 +54,8 @@ public class ResultPageTest {
 
         try {
             result.setFetchParameters(keyword, type, page);
-        } catch (URISyntaxException e) {
-            fail("Unexpected URISyntaxException");
+        } catch (MalformedURLException e) {
+            fail("Unexpected MalformedURLException");
         }
 
         url = SERVER_URL + "?cari=" + keyword + "&type=" + type + "&page=" + page;
@@ -68,15 +68,15 @@ public class ResultPageTest {
 
         try {
             result.setFetchParameters(keyword, type, page);
-        } catch (URISyntaxException e) {
-            fail("Unexpected URISyntaxException");
+        } catch (MalformedURLException e) {
+            fail("Unexpected MalformedURLException");
         }
 
         url = SERVER_URL + "?cari=" + keyword + "&type=" + type + "&page=" + page;
         assertEquals("Failed to reset parameters (#setFetchParameters)", url, result.getUrl());
     }
 
-    @Test public void getParseable() throws URISyntaxException {
+    @Test public void getParseable() throws MalformedURLException {
         String keyword = "kfc";
         String type = "P";
         int page = 1;
@@ -93,7 +93,7 @@ public class ResultPageTest {
         }
     }
 
-    @Test public void getParseableNotFound() throws URISyntaxException {
+    @Test public void getParseableNotFound() throws MalformedURLException {
         String keyword = "tak ada";
         String type = "P";
         int page = 1;

@@ -1,10 +1,10 @@
 package com.blogspot.aptgetmoo.dhjclient.item;
 
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URISyntaxException;
-
-import org.apache.http.client.utils.URIBuilder;
+import java.net.URL;
+import java.net.URLEncoder;
 
 import com.blogspot.aptgetmoo.dhjclient.parser.Webpage;
 
@@ -18,9 +18,9 @@ public class ResultPage extends Webpage {
     private final static String DEFAULT_BASE_URL =
             "http://www.halal.gov.my/ehalal/directory_standalone.php";
 
-    private URI mBaseUrl;
+    private URL mBaseUrl;
 
-    private URI mUrl;
+    private URL mUrl;
 
     /**
      * This assigns the default Jakim's web URL. In such a case the URL is invalid, put a new URL
@@ -32,9 +32,9 @@ public class ResultPage extends Webpage {
      */
     public ResultPage() {
         try {
-            mBaseUrl = new URI(DEFAULT_BASE_URL);
-        } catch (URISyntaxException e) {
-            // default URL should not throw URISyntaxException
+            mBaseUrl = new URL(DEFAULT_BASE_URL);
+        } catch (MalformedURLException e) {
+            // default URL should not throw MalformedURLException
             e.printStackTrace();
         }
     }
@@ -44,8 +44,8 @@ public class ResultPage extends Webpage {
      * @throws 	MalformedURLException If given URL is invalid
      * @throws 	URISyntaxException
      */
-    public ResultPage(String pBaseUrl) throws URISyntaxException {
-        mBaseUrl = new URI(pBaseUrl);
+    public ResultPage(String pBaseUrl) throws MalformedURLException {
+        mBaseUrl = new URL(pBaseUrl);
     }
 
     @Override
@@ -64,13 +64,15 @@ public class ResultPage extends Webpage {
      * @param 	pPage
      * @throws 	URISyntaxException
      */
-    public void setFetchParameters(String pKeyword, String pType, int pPage) throws URISyntaxException {
-        URIBuilder builder = new URIBuilder(mBaseUrl);
-        builder.addParameter("cari", pKeyword);
-        builder.addParameter("type", pType);
-        builder.addParameter("page", String.valueOf(pPage));
-
-        mUrl = builder.build();
+    public void setFetchParameters(String pKeyword, String pType, int pPage) throws MalformedURLException {
+        try {
+            mUrl = new URL(mBaseUrl.toString()
+                    + "?cari=" + URLEncoder.encode(pKeyword, "UTF-8")
+                    + "&type=" + URLEncoder.encode(pType, "UTF-8")
+                    + "&page=" + URLEncoder.encode(String.valueOf(pPage), "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
 }
