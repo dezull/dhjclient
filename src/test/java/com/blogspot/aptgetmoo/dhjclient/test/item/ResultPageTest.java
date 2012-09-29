@@ -84,17 +84,29 @@ public class ResultPageTest {
         // Test with valid URL, but wherever it points to doesn't matter
         final String validUrl = "http://www.google.com";
         ResultPage mockResult = new MockResultPage(validUrl);
+        mockResult.setFetchParameters(keyword, type, page);
 
         try {
-            mockResult.setFetchParameters(keyword, type, page);
-            try {
-                assertNotNull(mockResult.getParseable());
-            } catch (IOException e) {
-                fail("Unexpected IOException");
-            }
-        } catch (URISyntaxException e) {
-            fail("Unexpected URISyntaxException");
+            assertNotNull(mockResult.getParseable());
+        } catch (IOException e) {
+            fail("Unexpected IOException");
         }
     }
 
+    @Test public void getParseableNotFound() throws URISyntaxException {
+        String keyword = "tak ada";
+        String type = "P";
+        int page = 1;
+
+        // Test with valid URL, but wherever it points to doesn't matter
+        final String validUrl = "http://www.google.com";
+        ResultPage mockResult = new MockResultPage(validUrl);
+        mockResult.setFetchParameters(keyword, type, page);
+
+        try {
+            assertNotNull(mockResult.getParseable());
+        } catch (IOException e) {
+            fail("Unexpected IOException");
+        }
+    }
 }
