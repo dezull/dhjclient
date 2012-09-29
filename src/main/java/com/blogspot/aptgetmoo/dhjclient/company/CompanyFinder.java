@@ -11,26 +11,22 @@ import com.blogspot.aptgetmoo.dhjclient.parser.Webpage;
 
 public class CompanyFinder implements ICompanyFinder {
 
-	private Webpage mPage;
+    private Webpage mPage;
 
     public CompanyFinder(CompanyPage pPage) {
         mPage = pPage;
     }
 
-	@Override
-	public Company find(String pCompCode) throws IOException {
-    	((CompanyPage) mPage).setCompanyCode(pCompCode);
+    @Override
+    public Company find(String pCompCode) throws IOException {
+        ((CompanyPage) mPage).setCompanyCode(pCompCode);
         Document doc;
 
-        try {
-            doc = Jsoup.parse(mPage.getParseable());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        doc = Jsoup.parse(mPage.getParseable());
 
         Company company = new Company(pCompCode);
         if (doc != null) {
-        	company = parseRows(company, doc.select("table table tr"));
+            company = parseRows(company, doc.select("table table tr"));
         }
 
         return company;
@@ -42,8 +38,8 @@ public class CompanyFinder implements ICompanyFinder {
         Elements temp;
         if ((temp = pRows.get(1).select("td")).size() > 0) pCom.name = temp.get(1).text();
         if (pCom.name.trim().isEmpty()) {
-        	// That's it, no need further processing, the company doesn't exists
-        	return null;
+            // That's it, no need further processing, the company doesn't exists
+            return null;
         }
 
         if ((temp = pRows.get(2).select("td")).size() > 0) pCom.address = formatAddress(temp.get(1).html());

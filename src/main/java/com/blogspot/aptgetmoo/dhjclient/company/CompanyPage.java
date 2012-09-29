@@ -49,13 +49,17 @@ public class CompanyPage extends Webpage {
 
     @Override
     public String getParseable() throws IOException {
-    	final String companyCode = getCompanyCode();
+        final String companyCode = getCompanyCode();
 
-    	if (companyCode == null || companyCode.trim().isEmpty()) {
-    		throw new IOException("getCompanyCode() returns null or is empty");
-    	}
+        if (!companyCode.matches("[a-zA-Z0-9-]{4,}")) {
+            throw new IOException("Invalid company code");
+        }
 
-    	return super.getParseable();
+        if (companyCode == null || companyCode.trim().isEmpty()) {
+            throw new IOException("getCompanyCode() returns null or is empty");
+        }
+
+        return super.getParseable();
     }
 
     public String getCompanyCode() {
@@ -63,7 +67,7 @@ public class CompanyPage extends Webpage {
     }
 
     public void setCompanyCode(String pCompanyCode) {
-    	mCompanyCode = pCompanyCode;
+        mCompanyCode = pCompanyCode;
     }
 
 }

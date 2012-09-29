@@ -6,8 +6,10 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.blogspot.aptgetmoo.dhjclient.company.CompanyPage;
@@ -46,7 +48,7 @@ public class CompanyPageTest {
     }
 
     @Test public void getBaseUrlDefault() {
-    	CompanyPage page = new CompanyPage();
+        CompanyPage page = new CompanyPage();
         page.setCompanyCode(COMP_CODE_1);
 
         assertNotNull(page.getBaseUrl());
@@ -57,7 +59,7 @@ public class CompanyPageTest {
         CompanyPage page;
 
         try {
-        	page = new CompanyPage(validUrl);
+            page = new CompanyPage(validUrl);
             assertEquals(validUrl, page.getBaseUrl());
         } catch (MalformedURLException e) {
             fail("Unexpected MalformedURLException");
@@ -65,7 +67,7 @@ public class CompanyPageTest {
     }
 
     @Test public void getUrlDefault() {
-    	CompanyPage page = new CompanyPage();
+        CompanyPage page = new CompanyPage();
         page.setCompanyCode(COMP_CODE_1);
         final String baseUrl = page.getBaseUrl();
         final String url = page.getUrl();
@@ -79,8 +81,8 @@ public class CompanyPageTest {
         CompanyPage page;
 
         try {
-        	page = new CompanyPage(validUrl);
-        	page.setCompanyCode(COMP_CODE_1);
+            page = new CompanyPage(validUrl);
+            page.setCompanyCode(COMP_CODE_1);
             final String baseUrl = page.getBaseUrl();
             final String url = page.getUrl();
 
@@ -89,6 +91,33 @@ public class CompanyPageTest {
             assertTrue(url.startsWith(baseUrl));
         } catch (MalformedURLException e) {
             fail("Unexpected MalformedURLException");
+        }
+    }
+
+    @Ignore("Potentially long running HTTP request")
+    @Test public void getParseableValidCompCode() {
+        CompanyPage page;
+
+        try {
+            page = new CompanyPage();
+            page.setCompanyCode(COMP_CODE_1);
+            page.getParseable();
+        } catch (IOException e) {
+            fail("Unexpected " + IOException.class.getName());
+        }
+    }
+
+    @Test public void getParseableInvalidCompCode() {
+        final String invalidCompCode = "COMP=CODE=1234";
+        CompanyPage page;
+
+        try {
+            page = new CompanyPage();
+            page.setCompanyCode(invalidCompCode);
+            page.getParseable();
+            fail("Expected " + IOException.class.getName());
+        } catch (IOException e) {
+            assertTrue(e.getMessage().compareTo("Invalid company code") == 0);
         }
     }
 
