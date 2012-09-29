@@ -1,5 +1,6 @@
 package com.blogspot.aptgetmoo.dhjclient.test.company;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.NoSuchElementException;
@@ -14,7 +15,7 @@ public class MockCompanyPage extends CompanyPage {
     }
 
     @Override
-    public String getParseable() {
+    public String getParseable() throws IOException {
         Class<? extends MockCompanyPage> cls = getClass();
         InputStream is = cls.getResourceAsStream("/" + getCompanyCode() + ".html");
 
