@@ -8,6 +8,11 @@ import org.apache.http.client.utils.URIBuilder;
 
 import com.blogspot.aptgetmoo.dhjclient.parser.Webpage;
 
+/**
+ * HTML page representing Jakim's Direktori Halal - Company page
+ *
+ * @author Dzul Nizam
+ */
 public class CompanyPage extends Webpage {
 
     private final static String DEFAULT_BASE_URL =
@@ -22,6 +27,7 @@ public class CompanyPage extends Webpage {
     /**
      * This assigns the default Jakim's web URL. In such a case the URL is invalid, put a new URL
      * in #CompanyPage(String pBaseUrl), or the Web is no longer in service :(
+     *
      * @see #CompanyPage(String)
      * @see #getBaseUrl()
      */
@@ -30,8 +36,8 @@ public class CompanyPage extends Webpage {
     }
 
     /**
-     * @param pBaseUrl Base URL for Jakim's search result page
-     * @throws URISyntaxException If given URL is invalid
+     * @param 	pBaseUrl			Base URL for Jakim's search result page
+     * @throws 	URISyntaxException 	If given URL is invalid
      */
     public CompanyPage(String pBaseUrl) throws URISyntaxException {
         mBaseUrl = new URI(pBaseUrl);
@@ -63,15 +69,15 @@ public class CompanyPage extends Webpage {
     }
 
     /**
-     * @return Company code
+     * @return	Company code
      */
     public String getCompanyCode() {
         return mCompanyCode;
     }
 
     /**
-     * @param pCompanyCode Company code
-     * @throws URISyntaxException
+     * @param 	pCompanyCode Company code
+     * @throws 	URISyntaxException
      */
     public void setCompanyCode(String pCompanyCode) throws URISyntaxException {
         mCompanyCode = pCompanyCode;

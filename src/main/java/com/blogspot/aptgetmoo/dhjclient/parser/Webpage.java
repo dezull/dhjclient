@@ -8,12 +8,13 @@ import java.net.URL;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * Parseable Webpage
+ *
+ * @author Dzul Nizam
+ */
 public abstract class Webpage implements IParseable {
 
-    /**
-     * @return HTML page String
-     * @throws IOException On any IO errors while fetching the page
-     */
     @Override
     public String getParseable() throws IOException {
         URL url = new URL(getUrl());

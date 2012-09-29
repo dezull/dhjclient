@@ -3,6 +3,8 @@ package com.blogspot.aptgetmoo.dhjclient.item;
 import java.io.Serializable;
 
 /**
+ * Item type for Jakim's Direktori Halal search
+ *
  * @author Dzul Nizam
  */
 public enum ItemType implements Serializable {

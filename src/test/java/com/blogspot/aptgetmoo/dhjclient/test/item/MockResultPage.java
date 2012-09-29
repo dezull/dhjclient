@@ -17,7 +17,6 @@ public class MockResultPage extends ResultPage {
     /**
      * @param pUrl URL will be ignored.
      * @throws URISyntaxException
-     * @see #fetchHtml()
      */
     public MockResultPage(String pUrl) throws URISyntaxException {
         super(pUrl);

@@ -2,6 +2,11 @@ package com.blogspot.aptgetmoo.dhjclient.parser;
 
 import java.io.IOException;
 
+/**
+ * Parseable item that may be used by {@link IFinder}
+ *
+ * @author Dzul Nizam
+ */
 public interface IParseable {
 
     /**

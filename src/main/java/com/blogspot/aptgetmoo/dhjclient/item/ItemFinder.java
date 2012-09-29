@@ -27,11 +27,18 @@ public class ItemFinder implements IItemFinder {
 
     private int mTotalResult;
 
+    /**
+     * @param	pResultPage
+     */
     public ItemFinder(Webpage pResultPage) {
         mResultPage = pResultPage;
         mItemsPerPage = DEFAULT_ITEMS_PER_PAGE;
     }
 
+    /**
+     * @param	pResultPage
+     * @param	pItemsPerPage
+     */
     public ItemFinder(Webpage pResultPage, int pItemsPerPage) {
         mResultPage = pResultPage;
         mItemsPerPage = pItemsPerPage;
@@ -64,6 +71,9 @@ public class ItemFinder implements IItemFinder {
         return mItemsPerPage;
     }
 
+    /**
+     * @param	pItemsPerPage
+     */
     public void setItemsPerPage(int pItemsPerPage) {
         mItemsPerPage = pItemsPerPage;
     }

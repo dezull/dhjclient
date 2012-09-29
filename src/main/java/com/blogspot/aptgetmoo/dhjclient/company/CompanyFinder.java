@@ -10,10 +10,16 @@ import org.jsoup.select.Elements;
 
 import com.blogspot.aptgetmoo.dhjclient.parser.Webpage;
 
+/**
+ * @author Dzul Nizam
+ */
 public class CompanyFinder implements ICompanyFinder {
 
     private Webpage mPage;
 
+    /**
+     * @param 	pPage 	CompanyPage
+     */
     public CompanyFinder(CompanyPage pPage) {
         mPage = pPage;
     }

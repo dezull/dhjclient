@@ -9,7 +9,7 @@ import org.apache.http.client.utils.URIBuilder;
 import com.blogspot.aptgetmoo.dhjclient.parser.Webpage;
 
 /**
- * HTML page returned by Jakim's Halal web search
+ * HTML page returned by Jakim's Direktori Halal web search
  *
  * @author Dzul Nizam
  */
@@ -25,7 +25,8 @@ public class ResultPage extends Webpage {
     /**
      * This assigns the default Jakim's web URL. In such a case the URL is invalid, put a new URL
      * in #ResultPage(String pBaseUrl), or the Web is no longer in service :(
-     * @throws URISyntaxException
+     *
+     * @throws	URISyntaxException
      * @see #ResultPage(String)
      * @see #getBaseUrl()
      */
@@ -34,9 +35,9 @@ public class ResultPage extends Webpage {
     }
 
     /**
-     * @param pBaseUrl Base URL for Jakim's search result page
-     * @throws MalformedURLException If given URL is invalid
-     * @throws URISyntaxException
+     * @param 	pBaseUrl Base URL for Jakim's search result page
+     * @throws 	MalformedURLException If given URL is invalid
+     * @throws 	URISyntaxException
      */
     public ResultPage(String pBaseUrl) throws URISyntaxException {
         mBaseUrl = new URI(pBaseUrl);
@@ -53,10 +54,10 @@ public class ResultPage extends Webpage {
     }
 
     /**
-     * @param pKeyword
-     * @param pType
-     * @param pPage
-     * @throws URISyntaxException
+     * @param 	pKeyword
+     * @param 	pType
+     * @param 	pPage
+     * @throws 	URISyntaxException
      */
     public void setFetchParameters(String pKeyword, String pType, int pPage) throws URISyntaxException {
         URIBuilder builder = new URIBuilder(mBaseUrl);
