@@ -44,7 +44,7 @@ public class CompanyFinder implements ICompanyFinder {
 
         Elements temp;
         if ((temp = pRows.get(1).select("td")).size() > 0) pCom.name = cleanUp(temp.get(1).text());
-        if (pCom.name.trim().isEmpty()) {
+        if (pCom.name.trim().length() == 0) {
             // That's it, no need further processing, the company doesn't exists
             return null;
         }
