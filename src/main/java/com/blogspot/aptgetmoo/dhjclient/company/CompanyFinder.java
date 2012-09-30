@@ -2,6 +2,7 @@ package com.blogspot.aptgetmoo.dhjclient.company;
 
 import java.io.IOException;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.safety.Whitelist;
@@ -42,13 +43,13 @@ public class CompanyFinder implements ICompanyFinder {
         if (pRows.size() < 9) return null;
 
         Elements temp;
-        if ((temp = pRows.get(1).select("td")).size() > 0) pCom.name = temp.get(1).text();
+        if ((temp = pRows.get(1).select("td")).size() > 0) pCom.name = cleanUp(temp.get(1).text());
         if (pCom.name.trim().isEmpty()) {
             // That's it, no need further processing, the company doesn't exists
             return null;
         }
 
-        if ((temp = pRows.get(2).select("td")).size() > 0) pCom.address = formatAddress(temp.get(1).html());
+        if ((temp = pRows.get(2).select("td")).size() > 0) pCom.address = cleanUp(temp.get(1).html());
         if ((temp = pRows.get(4).select("td")).size() > 0) pCom.phone = temp.get(1).text();
         if ((temp = pRows.get(5).select("td")).size() > 0) pCom.fax = temp.get(1).text();
         if ((temp = pRows.get(6).select("td")).size() > 0) pCom.email = temp.get(1).text();
@@ -59,16 +60,15 @@ public class CompanyFinder implements ICompanyFinder {
         return pCom;
     }
 
-    private String formatAddress(String pAddress) {
+    private String cleanUp(String pStr) {
         final Whitelist whiteList = new Whitelist();
+        pStr = StringEscapeUtils.unescapeHtml4(Jsoup.clean(pStr, whiteList.addTags("br")));
 
-        pAddress = Jsoup.clean(pAddress, whiteList.addTags("br"));
-        pAddress = pAddress.replace("<br />", "")
-                .replace("<br>", "")
-                .replaceAll("(?m)(?:^|\\G) ", "")
-                .replaceAll("r\r?\n", "\n");
-
-        return pAddress;
+        return pStr.replace("<br />", "")
+            .replace("<br>", "")
+            // .replace("&nbsp;", " ")
+            .replaceAll("(?m)(?:^|\\G) ", "")
+            .replaceAll("r\r?\n", "\n");
     }
 
 }

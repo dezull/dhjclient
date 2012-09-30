@@ -3,6 +3,7 @@ package com.blogspot.aptgetmoo.dhjclient.item;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -202,7 +203,7 @@ public class ItemFinder implements IItemFinder {
             return null;
         }
 
-        return cleanUp(pCol.html());
+        return cleanUp(pCol.text());
     }
 
     private String parseCompCode(Element pCol) {
@@ -253,7 +254,7 @@ public class ItemFinder implements IItemFinder {
             case SLAUGHTERHOUSE:
             case COMPANY:
                 itemRow.itemBrand = null;
-                itemRow.itemCompanyName = itemRow.itemName;
+                itemRow.itemCompanyName = parseCompName(itemRow.itemName);
                 break;
         }
 
@@ -268,7 +269,7 @@ public class ItemFinder implements IItemFinder {
             if (start == -1 || brand.length() <= start) {
                 return "";
             } else {
-                return pBrandRow.substring(7).trim();
+                return cleanUp(pBrandRow.substring(7).trim());
             }
 
         }
@@ -293,17 +294,17 @@ public class ItemFinder implements IItemFinder {
                 compName = pCompNameRow.trim();
         }
 
-        return compName;
+        return cleanUp(compName);
     }
 
     private String cleanUp(String pStr) {
         final Whitelist whiteList = new Whitelist();
-        pStr = Jsoup.clean(pStr, whiteList.addTags("br"));
+        pStr = StringEscapeUtils.unescapeHtml4(Jsoup.clean(pStr, whiteList.addTags("br")));
 
         return pStr.replace("<br />", "")
-        .replace("<br>", "")
-        .replace("&nbsp;", " ")
-        .replaceAll("(?m)(?:^|\\G) ", "")
-        .replaceAll("r\r?\n", "\n");
+            .replace("<br>", "")
+            // .replace("&nbsp;", " ")
+            .replaceAll("(?m)(?:^|\\G) ", "")
+            .replaceAll("r\r?\n", "\n");
     }
 }
