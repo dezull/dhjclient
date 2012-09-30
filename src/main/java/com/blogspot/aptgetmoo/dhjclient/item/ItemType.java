@@ -12,25 +12,25 @@ public enum ItemType implements Serializable {
     PRODUCT ("product", "P"),
     PREMISES ("premises", "M"),
     MENU ("menu", "Z"),
-    SLAUGHTER ("slaughter", "S");
+    SLAUGHTERHOUSE ("slaughterhouse", "S");
 
-    private final String mFileName;
-    private final String mQueryStr;
+    private final String mName;
+    private final String mQueryString;
 
-    ItemType(String fileName, String queryStr) {
-        mFileName = fileName;
-        mQueryStr = queryStr;
+    ItemType(String pName, String pQueryString) {
+        mName = pName;
+        mQueryString = pQueryString;
     }
 
-    public String getFileName() {
-        return mFileName;
+    public String getName() {
+        return mName;
     }
 
-    public String getQueryStr() {
-        return mQueryStr;
+    public String getQueryString() {
+        return mQueryString;
     }
 
     public String toString() {
-        return mFileName + ": " + mQueryStr;
+        return mName + ": " + mQueryString;
     }
 }

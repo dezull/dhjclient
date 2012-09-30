@@ -83,7 +83,7 @@ public class ItemFinder implements IItemFinder {
         Document doc = null;
         ArrayList<Item> dataHolders = null;
 
-        ((ResultPage) mResultPage).setFetchParameters(keyword, type.getQueryStr(), page);
+        ((ResultPage) mResultPage).setFetchParameters(keyword, type.getQueryString(), page);
         doc = Jsoup.parse(mResultPage.getParseable());
 
         dataHolders = new ArrayList<Item>();
