@@ -198,6 +198,10 @@ public class ItemFinder implements IItemFinder {
     }
 
     private String parseExpiredDate(Element pCol) {
+        if (mItemType == ItemType.COMPANY || mItemType == ItemType.SLAUGHTERHOUSE) {
+            return null;
+        }
+
         return cleanUp(pCol.html());
     }
 
@@ -245,6 +249,11 @@ public class ItemFinder implements IItemFinder {
                 if (temps.length > 1) {
                     itemRow.itemCompanyName = parseCompName(temps[1]);
                 }
+                break;
+            case SLAUGHTERHOUSE:
+            case COMPANY:
+                itemRow.itemBrand = null;
+                itemRow.itemCompanyName = itemRow.itemName;
                 break;
         }
 
