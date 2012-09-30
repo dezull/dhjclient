@@ -66,7 +66,7 @@ public class CompanyPage extends Webpage {
             throw new IOException("Invalid company code");
         }
 
-        if (companyCode == null || companyCode.trim().isEmpty()) {
+        if (companyCode == null || companyCode.trim().length() == 0) {
             throw new IOException("getCompanyCode() returns null or is empty");
         }
 

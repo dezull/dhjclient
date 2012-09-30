@@ -31,7 +31,7 @@ public abstract class Webpage implements IParseable {
                 return "";
             }
         } catch (ProtocolException e) {
-            throw new IOException(e);
+            throw new IOException(e.getMessage());
         }
     }
 
