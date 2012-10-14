@@ -45,7 +45,7 @@ class Dhj {
         System.out.println("\tcomp-name: " + item.itemCompanyName);
         System.out.println("\titem brand: " + item.itemBrand);
         System.out.println("\titem expiry: " + item.itemExpiryDate);
-        System.out.println("\titem address: " + item.itemAddress);
+        System.out.println("\titem address: " + item.itemAddress.replace("\n", " "));
         System.out.println("\tseq: " + item.itemSequence);
     }
 
