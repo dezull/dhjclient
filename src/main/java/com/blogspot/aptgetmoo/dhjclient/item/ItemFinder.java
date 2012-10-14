@@ -232,7 +232,7 @@ public class ItemFinder implements IItemFinder {
         String html = cleanUp(pCol.html());
 
         final Item itemRow = new Item();
-        final String[] temps = html.split("\n", 10);
+        final String[] temps = html.split("\n", 3);
 
         if (temps == null || temps.length == 0) return itemRow;
 
@@ -242,19 +242,20 @@ public class ItemFinder implements IItemFinder {
                 if (temps.length > 2) {
                     itemRow.itemBrand = parseBrand(temps[1]);
                     itemRow.itemCompanyName = parseCompName(temps[2]);
+                    itemRow.itemAddress = "";
                 }
                 break;
             case PREMISES:
             case MENU:
-                itemRow.itemBrand = null;
-                if (temps.length > 1) {
-                    itemRow.itemCompanyName = parseCompName(temps[1]);
-                }
+                itemRow.itemBrand = "";
+                if (temps.length > 1) itemRow.itemCompanyName = parseCompName(temps[1]);
+                if (temps.length > 2) itemRow.itemAddress = parseAddress(temps[2]);
                 break;
             case SLAUGHTERHOUSE:
             case COMPANY:
-                itemRow.itemBrand = null;
+                itemRow.itemBrand = "";
                 itemRow.itemCompanyName = parseCompName(itemRow.itemName);
+                itemRow.itemAddress = "";
                 break;
         }
 
@@ -272,6 +273,14 @@ public class ItemFinder implements IItemFinder {
                 return cleanUp(pBrandRow.substring(7).trim());
             }
 
+        }
+
+        return "";
+    }
+
+    private String parseAddress(String pAddressRow) {
+        if (mItemType == ItemType.PREMISES) {
+            return cleanUp(pAddressRow);
         }
 
         return "";
