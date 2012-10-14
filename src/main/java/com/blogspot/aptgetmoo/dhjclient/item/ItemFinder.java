@@ -249,7 +249,7 @@ public class ItemFinder implements IItemFinder {
             case MENU:
                 itemRow.itemBrand = "";
                 if (temps.length > 1) itemRow.itemCompanyName = parseCompName(temps[1]);
-                if (temps.length > 2) itemRow.itemAddress = parseAddress(temps[2]);
+                if (temps.length > 2) itemRow.itemAddress = temps[2];
                 break;
             case SLAUGHTERHOUSE:
             case COMPANY:
@@ -273,14 +273,6 @@ public class ItemFinder implements IItemFinder {
                 return cleanUp(pBrandRow.substring(7).trim());
             }
 
-        }
-
-        return "";
-    }
-
-    private String parseAddress(String pAddressRow) {
-        if (mItemType == ItemType.PREMISES) {
-            return cleanUp(pAddressRow);
         }
 
         return "";
@@ -314,6 +306,6 @@ public class ItemFinder implements IItemFinder {
             .replace("<br>", "")
             // .replace("&nbsp;", " ")
             .replaceAll("(?m)(?:^|\\G) ", "")
-            .replaceAll("r\r?\n", "\n");
+            .replaceAll("\r?\n", "\n");
     }
 }

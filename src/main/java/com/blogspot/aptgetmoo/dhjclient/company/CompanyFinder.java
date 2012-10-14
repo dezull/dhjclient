@@ -68,7 +68,7 @@ public class CompanyFinder implements ICompanyFinder {
             .replace("<br>", "")
             // .replace("&nbsp;", " ")
             .replaceAll("(?m)(?:^|\\G) ", "")
-            .replaceAll("r\r?\n", "\n");
+            .replaceAll("\r?\n", "\n");
     }
 
 }
