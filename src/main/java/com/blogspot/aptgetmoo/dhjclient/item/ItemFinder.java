@@ -102,46 +102,47 @@ public class ItemFinder implements IItemFinder {
         return dataHolders;
     }
 
-    private int parseTotalResult(Document doc) {
+    private int parseTotalResult(Document doc) throws IOException {
         Elements reuseElems;
         Element reuseElem;
+        final String errMsg = "Value for total result could not be parsed";
 
         // First table
         reuseElems = doc.select("body > table > tbody > tr");
-        if (reuseElems.size() < 2) return 0;
+        if (reuseElems.size() < 2) throw new IOException(errMsg);
 
         reuseElem = reuseElems.get(1).select("> td").first();
-        if (reuseElem == null) return 0;
+        if (reuseElem == null) throw new IOException(errMsg);
 
         // Second table
         reuseElems = reuseElem.select("> table > tbody > tr");
-        if (reuseElems.size() < 2) return 0;
+        if (reuseElems.size() < 2) throw new IOException(errMsg);
 
         reuseElem = reuseElems.get(1).select("td").first();
-        if (reuseElem == null) return 0;
+        if (reuseElem == null) throw new IOException(errMsg);
 
         // Third table
         reuseElems = reuseElem.select("> table > tbody > tr");
-        if (reuseElems.size() < 1) return 0;
+        if (reuseElems.size() < 1) throw new IOException(errMsg);
 
         reuseElems = reuseElems.get(0).select("> td");
-        if (reuseElems.size() < 5) return 0;
+        if (reuseElems.size() < 5) throw new IOException(errMsg);
 
         reuseElem = reuseElems.get(mItemType.ordinal());
-        if (reuseElem == null) return 0;
+        if (reuseElem == null) throw new IOException(errMsg);
 
         // Fourth table
         reuseElems = reuseElem.select("> table > tbody > tr");
-        if (reuseElems.size() < 1) return 0;
+        if (reuseElems.size() < 1) throw new IOException(errMsg);
 
         reuseElem = reuseElems.get(0);
-        if (reuseElem == null) return 0;
+        if (reuseElem == null) throw new IOException(errMsg);
 
         reuseElems = reuseElem.select("> td");
-        if (reuseElems.size() < 3) return 0;
+        if (reuseElems.size() < 3) throw new IOException(errMsg);
 
         String text = reuseElems.get(1).text();
-        if (text.length() == 0) return 0;
+        if (text.length() == 0) throw new IOException(errMsg);
 
         final int start = text.indexOf('(');
         final int end = text.indexOf(')');
@@ -151,11 +152,11 @@ public class ItemFinder implements IItemFinder {
                 text = text.substring(start + 1, end);
                 return Integer.valueOf(text);
             } catch (NumberFormatException e) {
-                return 0;
+                throw new IOException(e.getMessage());
             }
         }
 
-        return 0;
+        throw new IOException(errMsg);
     }
 
     private ArrayList<Item> parseRows(Elements rows) {
